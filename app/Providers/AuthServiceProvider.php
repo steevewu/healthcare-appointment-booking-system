@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 // use Illuminate\Support\Facades\Gate;
+use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -23,12 +24,17 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        VerifyEmail::toMailUsing(function(object $notificable, string $url){
+        VerifyEmail::toMailUsing(function(object $notifiable, string $url){
             return (new MailMessage)
             ->subject('Phenikaa Clinic | Vui lòng Xác thực Địa chỉ Email của Bạn')
             ->markdown('emails.verify', ['url' => $url]);
         });
 
+        ResetPassword::toMailUsing(function(object $notifiable, string $url){
+            return (new MailMessage)
+            ->subject('Phenikaa Clinic | Yêu cầu Đặt lại Mật khẩu Tài khoản của Bạn')
+            ->markdown('emails.recovery', ['url' => $url]);
+        });
         
     }
 }

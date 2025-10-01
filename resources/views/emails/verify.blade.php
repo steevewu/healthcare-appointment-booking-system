@@ -1,5 +1,7 @@
 @component('mail::message')
-# Xác Thực Email
+<h1 align="center">Xác Thực Email</h1>
+
+<b>Kính gửi quý khách hàng,</b>
 
 Cảm ơn bạn đã đăng ký tài khoản tại <b><i>Phenikaa Clinic</i></b>!
 
@@ -23,6 +25,6 @@ Nếu bạn gặp bất kỳ vấn đề nào trong quá trình xác thực ho�
 <hr>
 <b>Trân trọng</b>,<br>
 Đội ngũ <b><i>Phenikaa Clinic</i></b><br>
-clinic.phenikaa.vn<br>
+<a href="http://clinic.phenikaa.vn">clinic.phenikaa.vn</a><br>
 0123.456.789
 @endcomponent

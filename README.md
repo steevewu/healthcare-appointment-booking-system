@@ -7,6 +7,7 @@ cd health-appointment-booking
 
 # install dependencies
 composer install
+npm install
 ```
 
 
@@ -20,6 +21,11 @@ Modify the database credentials in `.env` as yours, then run:
 
 ```bash
 php artisan key:generate
-php artisan migration:fresh
+php artisan migration:fresh --seed
 php artisan serve
+```
+Open another terminal and then run:
+
+```bash
+npm run dev
 ```
