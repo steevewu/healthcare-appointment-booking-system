@@ -168,6 +168,10 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\Filament\AdminPanelProvider::class,
+        App\Providers\Filament\OfficerPanelProvider::class,
+        App\Providers\Filament\SchedulerPanelProvider::class,
+        App\Providers\Filament\DoctorPanelProvider::class,
+        App\Providers\Filament\PatientPanelProvider::class,
         App\Providers\RouteServiceProvider::class,
     ])->toArray(),
 
@@ -185,5 +189,9 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         // 'Example' => App\Facades\Example::class,
     ])->toArray(),
+
+
+    'address_api' => env('ADDRESS_API', 'https://www.google.com')
+
 
 ];

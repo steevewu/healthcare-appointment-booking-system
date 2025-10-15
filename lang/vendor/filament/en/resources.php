@@ -5,36 +5,24 @@ return [
 
 
 
-    'email' => 'Địa chỉ email',
+    'email' => 'Email address',
     'navigation_label' => 'Quản Lý :model',
     'full_name' => 'Tên đầy đủ của :model',
     'alias' => 'Tên viết tắt của :model',
     'description' => 'Mô tả về :model',
     'phone_number' => 'Số điện thoại',
-    'fullname' => 'Họ và tên',
-    'province' => 'Tỉnh/ thành phố',
-    'district' => 'Quận/ huyện',
-    'ward' => 'Thị xã',
-    'address' => 'Địa chỉ',
-    'dob' => 'Ngày sinh',
-    'error' => 'Đã có lỗi xảy ra!',
-    'success' => 'Thành công!',
-
-    'err_messages' => 'Danh sách lỗi:',
-    'succ_messages' => 'Thực hiện :action hoàn tất!',
 
 
     'departments' => [
         'label' => 'Khoa',
         'plural_label' => 'Khoa',
         'group' => 'Hehe',
-        'place_holder' => 'Chọn khoa'
 
 
     ],
-
-
-
+    
+    
+    
     'doctors' => [
         'label' => 'Bác Sĩ',
         'plural_label' => 'Bác Sĩ',
@@ -46,8 +34,5 @@ return [
 
 
 
-
-
-
-
+    
 ];

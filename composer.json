@@ -7,12 +7,15 @@
     "require": {
         "php": "^8.1",
         "filament/filament": "^3.3",
+        "guava/filament-clusters": "*",
         "guzzlehttp/guzzle": "^7.2",
+        "jacobtims/inline-date-time-picker": "*",
         "jeffgreco13/filament-breezy": "*",
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
-        "spatie/laravel-permission": "^6.21"
+        "spatie/laravel-permission": "^6.21",
+        "ysfkaya/filament-phone-input": "^3.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
