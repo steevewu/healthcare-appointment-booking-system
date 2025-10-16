@@ -7,7 +7,7 @@ return [
 
     'email' => 'Địa chỉ email',
     'navigation_label' => 'Quản Lý :model',
-    'full_name' => 'Tên đầy đủ của :model',
+    'full_name' => 'Họ và tên của :model',
     'alias' => 'Tên viết tắt của :model',
     'description' => 'Mô tả về :model',
     'phone_number' => 'Số điện thoại',
@@ -19,7 +19,10 @@ return [
     'dob' => 'Ngày sinh',
     'error' => 'Đã có lỗi xảy ra!',
     'success' => 'Thành công!',
-
+    'password' => 'Mật khẩu',
+    'password_confirm' => 'Xác nhận mật khẩu',
+    'new_pass' => 'Mật khẩu mới',
+    'new_pass_confim' => 'Xác nhận mật khẩu mới',
     'err_messages' => 'Danh sách lỗi:',
     'succ_messages' => 'Thực hiện :action hoàn tất!',
 
@@ -40,9 +43,22 @@ return [
         'plural_label' => 'Bác Sĩ',
         'group' => 'Hehe',
 
-        'first_name' => 'Họ của :model',
-        'last_name' => 'Tên của :model',
     ],
+
+
+
+    'officers' => [
+        'label' => 'Giám Đốc',
+        'plural_label' => 'Giám Đốc',
+        'group' => 'Hehe',
+        
+    ],
+    'schedulers' => [
+        'label' => 'Điều Phối Viên',
+        'plural_label' => 'Điều Phối Viên',
+        'group' => 'Hehe',
+        
+    ]
 
 
 

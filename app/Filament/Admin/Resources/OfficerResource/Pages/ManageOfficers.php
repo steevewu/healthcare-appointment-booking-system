@@ -1,20 +1,20 @@
 <?php
 
-namespace App\Filament\Admin\Resources\SchedulerResource\Pages;
+namespace App\Filament\Admin\Resources\OfficerResource\Pages;
 
-use App\Filament\Admin\Resources\SchedulerResource;
-use App\Models\Scheduler;
+use App\Filament\Admin\Resources\OfficerResource;
+use App\Models\Officer;
 use App\Models\User;
 use Date;
+use DB;
 use Exception;
 use Filament\Actions;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\ManageRecords;
-use Illuminate\Support\Facades\DB;
 
-class ManageSchedulers extends ManageRecords
+class ManageOfficers extends ManageRecords
 {
-    protected static string $resource = SchedulerResource::class;
+    protected static string $resource = OfficerResource::class;
 
     protected function getHeaderActions(): array
     {
@@ -32,7 +32,7 @@ class ManageSchedulers extends ManageRecords
                                 ]
                             );
 
-                            $user->assignRole('scheduler');
+                            $user->assignRole('officer');
 
                             $user->forceFill(
                                 [
@@ -43,14 +43,14 @@ class ManageSchedulers extends ManageRecords
 
 
 
-                            $scheduler = new Scheduler();
+                            $doctor = new Officer();
 
-                            $scheduler->forceFill(
+                            $doctor->forceFill(
                                 [
                                     'user_id' => $user->id
                                 ]
-                                );
-                            $scheduler->save();
+                            );
+                            $doctor->save();
                         });
 
 
@@ -80,6 +80,4 @@ class ManageSchedulers extends ManageRecords
                 ->successNotification(null),
         ];
     }
-
-
 }

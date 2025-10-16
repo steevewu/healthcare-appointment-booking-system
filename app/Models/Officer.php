@@ -6,17 +6,19 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Scheduler extends Model
+class Officer extends Model
 {
     use HasFactory;
+
 
 
     protected $fillable = [
         'fullname',
         'dob',
-        'address'
+        'address',
     ];
-    
+
+
 
 
     public function user(): BelongsTo{

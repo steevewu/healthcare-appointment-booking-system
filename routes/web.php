@@ -23,75 +23,52 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    if(auth()->user()->hasRole('admin')) return redirect()->route('filament.admin.pages.dashboard');
-    if(auth()->user()->hasRole('doctor')) return redirect()->route('doctor.dashboard');
-    return redirect()->route('patient.dashboard');
+    
+
+    $route = 'filament.patient.pages.dashboard';
+
+
+    if (auth()->user()->hasRole('patient'))
+        return redirect()->route($route);
+
+
+    switch (auth()->user()->getRoleNames()->first()) {
+
+        case 'admin':
+            $route = 'filament.admin.pages.dashboard';
+            break;
+
+        case 'officer':
+            $route = 'filament.officer.pages.dashboard';
+            break;
+
+        case 'scheduler':
+            $route = 'filament.scheduler.pages.dashboard';
+            break;
+
+        case 'doctor':
+            $route = 'filament.doctor.pages.dashboard';
+            break;
+    }
+
+
+    return redirect()->route($route);
+
+
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+// Route::middleware('auth')->group(function () {
+//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+// });
+
+
+
+
+Route::get('/logout', function () {
+    return view('logout');
 });
 
 
-
-Route::group(
-    [
-        'prefix' => 'admin',
-        'middleware' => ['auth', 'verified', 'role:admin']
-    ], function(){
-
-
-        // admin stuff
-        // Route::get('/', function(){
-        //     return view('admin.dashboard');
-        // })->name('admin.dashboard');
-
-        Filament::getPanel('admin', true)->getRoutes();
-        
-
-    }
-);
-
-
-Route::group(
-    [
-        'prefix' => 'doctor',
-        'middleware' => ['auth', 'verified', 'role:doctor']
-    ],function(){
-
-        // doctor stuff
-        Route::get('/', function(){
-            return view('doctor.dashboard');
-        })->name('doctor.dashboard');
-    }
-);
-
-
-
-Route::group([
-    'prefix' => 'patient',
-    'middleware' => ['auth', 'verified', 'role:patient']
-    ], function(){
-
-
-        // patient stuff
-        Route::get('/', function(){
-            return view('patient.dashboard');
-        })->name('patient.dashboard');
-});
-
-
-
-Route::get('/test', function(){
-    User::create(
-        [
-            'email' => 'admin@pka.com',
-            'password' => 'admin'
-        ]
-    )->assignRole('admin')->forceFill(['email_verified_at' => Date::now()])->save();
-});
-
-
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

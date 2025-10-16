@@ -2,9 +2,9 @@
 
 namespace App\Filament\Admin\Resources;
 
-use App\Filament\Admin\Resources\SchedulerResource\Pages;
-use App\Filament\Admin\Resources\SchedulerResource\RelationManagers;
-use App\Models\Scheduler;
+use App\Filament\Admin\Resources\DoctorResource\Pages;
+use App\Filament\Admin\Resources\DoctorResource\RelationManagers;
+use App\Models\Doctor;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -15,25 +15,27 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class SchedulerResource extends Resource
+class DoctorResource extends Resource
 {
-    protected static ?string $model = Scheduler::class;
+    protected static ?string $model = Doctor::class;
+
+
 
     public static function getModelLabel(): string
     {
-        return __('filament::resources.schedulers.label');
+        return __('filament::resources.doctors.label');
     }
 
 
     public static function getPluralModelLabel(): string
     {
-        return __('filament::resources.schedulers.plural_label');
+        return __('filament::resources.doctors.plural_label');
     }
 
 
     public static function getNavigationLabel(): string
     {
-        return __('filament::resources.navigation_label', ['model' => SchedulerResource::getModelLabel()]);
+        return __('filament::resources.navigation_label', ['model' => DoctorResource::getModelLabel()]);
     }
 
 
@@ -45,15 +47,16 @@ class SchedulerResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return __('filament::resources.schedulers.group');
+        return __('filament::resources.doctors.group');
     }
+    
+    
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 //
-
                 Forms\Components\TextInput::make('email')
                     ->email()
                     ->required()
@@ -73,7 +76,6 @@ class SchedulerResource extends Resource
                     ->revealable()
                     ->dehydrated(false)
                     ->label(__('password_confirm')),
-
             ]);
     }
 
@@ -83,7 +85,7 @@ class SchedulerResource extends Resource
             ->columns([
                 //
                 Tables\Columns\TextColumn::make('fullname')
-                    ->label(__('filament::resources.full_name', ['model' => SchedulerResource::getModelLabel()]))
+                    ->label(__('filament::resources.full_name', ['model' => DoctorResource::getModelLabel()]))
                     ->searchable()
                     ->placeholder('-'),
                 Tables\Columns\TextColumn::make('user.email')
@@ -118,12 +120,12 @@ class SchedulerResource extends Resource
                         ]
                     )
                     ->using(function (array $data, Model $record) {
-                        if(isset($data['new_password']) && !empty($data['new_password'])){
+                        if (isset($data['new_password']) && !empty($data['new_password'])) {
                             $record->user->update(
                                 [
                                     'password' => $data['new_password']
                                 ]
-                                );
+                            );
                         }
 
                         return $record;
@@ -140,13 +142,7 @@ class SchedulerResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ManageSchedulers::route('/'),
+            'index' => Pages\ManageDoctors::route('/'),
         ];
-    }
-
-
-    public static function query(): Builder
-    {
-        return parent::query()->with('user');
     }
 }

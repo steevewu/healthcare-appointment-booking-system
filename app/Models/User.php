@@ -59,6 +59,17 @@ class User extends Authenticatable implements MustVerifyEmail, FilamentUser, Has
     }
 
 
+
+    public function scheduler(): HasOne{
+        return $this->hasOne(Scheduler::class,'user_id', 'id');
+    }
+
+
+    public function officer(): HasOne{
+        return $this->hasOne(Officer::class,'user_id', 'id');
+    }
+
+
     public function canAccessPanel(\Filament\Panel $panel): bool{
         return $this->hasVerifiedEmail() && $this->hasRole($panel->getId());
     }
