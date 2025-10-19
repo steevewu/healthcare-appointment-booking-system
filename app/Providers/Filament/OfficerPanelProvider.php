@@ -2,6 +2,8 @@
 
 namespace App\Providers\Filament;
 
+use App\Livewire\UserAddress;
+use App\Livewire\UserProfile;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -17,6 +19,7 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Jeffgreco13\FilamentBreezy\BreezyCore;
 use Saade\FilamentFullCalendar\FilamentFullCalendarPlugin;
 
 class OfficerPanelProvider extends PanelProvider
@@ -33,7 +36,25 @@ class OfficerPanelProvider extends PanelProvider
                 [
                     FilamentFullCalendarPlugin::make()
                     ->selectable()
-                    ->editable()
+                    ->editable(),
+                    BreezyCore::make()
+                    ->myProfile(
+                        shouldRegisterUserMenu:false,
+                        shouldRegisterNavigation:true,
+                        hasAvatars:false,
+                        navigationGroup:'Settings'
+                    )
+                    ->myProfileComponents(
+                        [
+                            UserProfile::class,
+                            UserAddress::class,
+                        ]
+                    )
+                    ->withoutMyProfileComponents(
+                        [
+                            'personal_info'
+                        ]
+                    )
                 ]
             )
             ->discoverResources(in: app_path('Filament/Officer/Resources'), for: 'App\\Filament\\Officer\\Resources')

@@ -12,7 +12,25 @@ class Workshift extends Model
 
 
 
+    public static function isConflict($start, $end, $doctor_id): bool{
+
+        return Workshift::where('doctor_id', $doctor_id)
+            ->whereHas('event', function ($query) use ($start, $end) {
+                $query->where('start_at', '<', $end)
+                      ->where('end_at', '>', $start);
+            })
+            ->exists();
+    }
+    
+
+
     public function doctor(): BelongsTo{
         return $this->belongsTo(Doctor::class, 'doctor_id', 'id');
     }
+
+
+    public function event(): BelongsTo{
+        return $this->belongsTo(Event::class, 'event_id', 'id');
+    }
+    
 }

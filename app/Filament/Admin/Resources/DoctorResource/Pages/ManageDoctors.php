@@ -5,6 +5,7 @@ namespace App\Filament\Admin\Resources\DoctorResource\Pages;
 use App\Filament\Admin\Resources\DoctorResource;
 use App\Models\Doctor;
 use App\Models\User;
+use App\Notifications\SteeveNotification;
 use Date;
 use DB;
 use Exception;
@@ -54,25 +55,11 @@ class ManageDoctors extends ManageRecords
                         });
 
 
-                        Notification::make(
-                            'success'
-                        )
-                            ->title(__('filament::resources.success'))
-                            ->body(__('filament::resources.succ_messages', ['action' => $action->getName()]), )
-                            ->success()
-                            ->seconds(5)
-                            ->send();
+                        SteeveNotification::sendSuccessNotification(action: $action);
 
                     } catch (Exception $e) {
 
-                        Notification::make(
-                            'error'
-                        )
-                            ->title(__('filament::resources.error'))
-                            ->body(__('filament::resources.err_messages') . "\n" . $e->getMessage())
-                            ->danger()
-                            ->seconds(10)
-                            ->send();
+                        SteeveNotification::sendFailedNotification(message: $e->getMessage());
 
 
                     }

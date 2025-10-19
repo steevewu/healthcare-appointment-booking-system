@@ -22,6 +22,14 @@ class Event extends Model
 
 
 
+    public static function isConflict($start, $end): bool
+    {
+        return Event::where(function ($query) use ($start, $end) {
+            $query->where('start_at', '<', $end)
+                ->where('end_at', '>', $start);
+        })->exists();
+    }
+
     public function workshifts(): HasMany{
         return $this->hasMany(Workshift::class, 'event_id', 'id');
     }

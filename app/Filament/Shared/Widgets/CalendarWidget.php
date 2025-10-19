@@ -5,6 +5,8 @@ namespace App\Filament\Shared\Widgets;
 use App\Models\Doctor;
 use App\Models\Event;
 use App\Models\Workshift;
+use App\Notifications\SteeveNotification;
+use Carbon\Carbon;
 use DB;
 use Exception;
 use Filament\Notifications\Notification;
@@ -84,9 +86,19 @@ class CalendarWidget extends FullCalendarWidget
                     try {
 
 
-                        DB::transaction(function () use ($data, $model, $action) {
-                            $doctors = $data['doctors'];
 
+                        DB::transaction(function () use ($data) {
+                            $start = Carbon::parse($data['start_at']);
+                            $end = Carbon::parse($data['end_at']);
+
+
+                            // check for conflict or overlap event
+                            if (Event::isConflict($start, $end))
+                                throw new Exception(__('filament::resources.time_conflict'));
+
+
+
+                            $doctors = $data['doctors'];
                             $event = new Event(
                                 [
                                     'title' => $data['title'],
@@ -101,6 +113,12 @@ class CalendarWidget extends FullCalendarWidget
 
 
                             foreach ($doctors as $doctor_id) {
+
+                                // check if doctor already has a workshift on this period
+                                if (Workshift::isConflict($start, $end, $doctor_id))
+                                    throw new Exception(__('filament::resources.doctor_conflict'));
+
+
                                 $workshift = new Workshift();
 
                                 $workshift->forceFill(
@@ -116,26 +134,12 @@ class CalendarWidget extends FullCalendarWidget
                         });
 
 
-                        Notification::make(
-                            'success'
-                        )
-                            ->title(__('filament::resources.success'))
-                            ->body(__('filament::resources.succ_messages', ['action' => $action->getName()]), )
-                            ->success()
-                            ->seconds(5)
-                            ->send();
+                        SteeveNotification::sendSuccessNotification(action: $action);
 
 
 
                     } catch (Exception $e) {
-                        Notification::make(
-                            'error'
-                        )
-                            ->title(__('filament::resources.error'))
-                            ->body(__('filament::resources.err_messages') . "\n" . $e->getMessage())
-                            ->danger()
-                            ->seconds(10)
-                            ->send();
+                        SteeveNotification::sendFailedNotification(message: $e->getMessage());
                     }
                 })
                 ->successNotificationMessage(null)
@@ -150,6 +154,8 @@ class CalendarWidget extends FullCalendarWidget
             Actions\EditAction::make()
                 ->mountUsing(
                     function (Event $record, Forms\Form $form, array $arguments) {
+
+                        // listen on Event's movement and fill in the form
                         $form->fill([
                             'title' => $record->title,
                             'start_at' => $arguments['event']['start'] ?? $record->start_at,
@@ -158,7 +164,79 @@ class CalendarWidget extends FullCalendarWidget
                             'doctors' => $record->workshifts()->pluck('doctor_id')->toArray()
                         ]);
                     }
-                ),
+                )
+                ->using(function (array $data, Event $record, Action $action) {
+
+                    try {
+                        DB::transaction(
+                            function () use ($data, $record) {
+
+
+                                $start = Carbon::parse($data['start_at']);
+                                $end = Carbon::parse($data['end_at']);
+
+
+                                if (Event::isConflict($start, $end))
+                                    throw new Exception(__('filament::resources.time_conflict'));
+                                
+                                
+                                
+                                $record->update([
+                                    'title' => $data['title'],
+                                    'start_at' => $data['start_at'],
+                                    'end_at' => $data['end_at'],
+                                    'description' => $data['description'],
+                                ]);
+
+
+
+
+                                $record->workshifts()->delete(); // soft delete in order to update
+            
+
+                                // re-create workshifts
+                                foreach ($data['doctors'] as $doctor_id) {
+                                    
+                                    
+                                    // check if doctor already has a workshift on this period
+                                    if (Workshift::isConflict($start, $end, $doctor_id))
+                                        throw new Exception(__('filament::resources.doctor_conflict'));
+
+
+
+                                    $workshift = new Workshift();
+
+                                    $workshift->forceFill(
+                                        [
+                                            'event_id' => $record->id,
+                                            'doctor_id' => $doctor_id
+                                        ]
+                                    );
+
+                                    $workshift->save();
+
+                                }
+
+
+                            }
+                        );
+
+
+
+                        SteeveNotification::sendSuccessNotification(action: $action);
+
+
+
+
+                    } catch (Exception $e) {
+
+
+                        SteeveNotification::sendFailedNotification(message: $e->getMessage());
+
+                    }
+
+                })
+                ->successNotificationMessage(null),
             Actions\DeleteAction::make(),
         ];
     }
@@ -210,6 +288,12 @@ class CalendarWidget extends FullCalendarWidget
         // prevent N+1 issue in query
         return $this->getModel()::with('workshifts')->findOrFail($key);
     }
+
+
+
+
+
+
 
 
 }
