@@ -85,10 +85,14 @@ class SchedulerResource extends Resource
                 Tables\Columns\TextColumn::make('fullname')
                     ->label(__('filament::resources.full_name', ['model' => SchedulerResource::getModelLabel()]))
                     ->searchable()
+                    ->disabledClick()
                     ->placeholder('-'),
                 Tables\Columns\TextColumn::make('user.email')
                     ->label(__('filament::resources.email'))
                     ->searchable()
+                    ->color('primary')
+                    ->disabledClick()
+                    ->copyable()
             ])
             ->filters([
                 //

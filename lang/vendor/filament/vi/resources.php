@@ -25,6 +25,8 @@ return [
     'new_pass_confim' => 'Xác nhận mật khẩu mới',
     'err_messages' => 'Danh sách lỗi:',
     'succ_messages' => 'Thực hiện :action hoàn tất!',
+    'id_label' => 'ID',
+    'name' => 'Tên của :model',
 
 
     'departments' => [

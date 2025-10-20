@@ -86,11 +86,15 @@ class DoctorResource extends Resource
                 //
                 Tables\Columns\TextColumn::make('fullname')
                     ->label(__('filament::resources.full_name', ['model' => DoctorResource::getModelLabel()]))
+                    ->disabledClick()
                     ->searchable()
                     ->placeholder('-'),
                 Tables\Columns\TextColumn::make('user.email')
                     ->label(__('filament::resources.email'))
+                    ->disabledClick()
                     ->searchable()
+                    ->color('primary')
+                    ->copyable()
             ])
             ->filters([
                 //

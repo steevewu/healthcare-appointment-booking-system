@@ -87,10 +87,14 @@ class OfficerResource extends Resource
                 Tables\Columns\TextColumn::make('fullname')
                     ->label(__('filament::resources.full_name', ['model' => OfficerResource::getModelLabel()]))
                     ->searchable()
+                    ->disabledClick()
                     ->placeholder('-'),
                 Tables\Columns\TextColumn::make('user.email')
                     ->label(__('filament::resources.email'))
                     ->searchable()
+                    ->disabledClick()
+                    ->color('primary')
+                    ->copyable()
             ])
             ->filters([
                 //

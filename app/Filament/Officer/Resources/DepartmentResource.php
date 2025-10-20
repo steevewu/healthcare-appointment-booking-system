@@ -62,7 +62,7 @@ class DepartmentResource extends Resource
                     ->required()
                     ->maxLength(50)
                     ->minLength(10)
-                    ->label(__('filament::resources.full_name', ['model' => DepartmentResource::getModelLabel()])),
+                    ->label(__('filament::resources.name', ['model' => DepartmentResource::getModelLabel()])),
                 Forms\Components\TextInput::make('alias')
                     ->required()
                     ->maxLength(15)

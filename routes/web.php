@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Models\User;
+use App\Services\AddressResolver;
 use Filament\Facades\Filament;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Route;
@@ -64,6 +65,11 @@ Route::get('/dashboard', function () {
 // });
 
 
+
+
+Route::get('/test', function(){
+    dd(AddressResolver::resolveName('1|1|1'));
+});
 
 
 Route::get('/logout', function () {

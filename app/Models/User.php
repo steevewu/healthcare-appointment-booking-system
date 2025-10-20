@@ -76,14 +76,10 @@ class User extends Authenticatable implements MustVerifyEmail, FilamentUser, Has
 
     public function getFilamentName(): string
     {
-        $user = auth()->user();
-        if($user->hasRole('admin')) return 'Admin';
-        if($user->hasRole('doctor')){
-            if ($user->doctor == null) return '';
-            return "{$user->doctor->firstname} {$user->doctor->lastname}";
-        }
-        if ($user->patient == null) return '';
-        return "{$user->patient->firstname} {$user->patient->lastname}";
+        $role = auth()->user()->getRoleNames()->first();
+
+
+        return auth()->user()->{$role}?->fullname ?? 'Admin';
     }
 
 }

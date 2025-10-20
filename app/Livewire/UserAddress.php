@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Notifications\SteeveNotification;
+use App\Services\AddressResolver;
 use DB;
 use Exception;
 use Http;
@@ -35,9 +36,7 @@ class UserAddress extends PersonalInfo
         $address = $this->user->{$role}?->address ?? null;
 
 
-        // split (using `explode()`), then extract as int using `array_map()`.
-        [$this->province_id, $this->district_id, $this->ward_id] = $address ? array_map('intval', explode('|', $address)) : [null, null, null];
-
+        [$this->province_id, $this->district_id, $this->ward_id] = AddressResolver::resolveCode($address);
 
 
         $this->form->fill(
