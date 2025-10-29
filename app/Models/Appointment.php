@@ -74,4 +74,12 @@ class Appointment extends Model
         return $this->workshift->event;
     }
 
+
+
+
+
+    public function patient(): BelongsTo
+    {
+        return $this->belongsTo(Patient::class, 'patient_id', 'id');
+    }
 }

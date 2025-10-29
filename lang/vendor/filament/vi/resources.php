@@ -54,13 +54,24 @@ return [
         'label' => 'Giám Đốc',
         'plural_label' => 'Giám Đốc',
         'group' => 'Hehe',
-        
+
     ],
     'schedulers' => [
         'label' => 'Điều Phối Viên',
         'plural_label' => 'Điều Phối Viên',
         'group' => 'Hehe',
-        
+
+    ],
+
+
+    'appointments' => [
+        'pending' => 'Chờ xác nhận',
+        'confirmed' => 'Đã xác nhận',
+        'canceled' => 'Đã hủy',
+        'confirm' => 'Xác nhận',
+        'cancel' => 'Hủy bỏ',
+        'start' => 'Thời gian bắt đầu',
+        'end' => 'Thời gian kết thúc'
     ]
 
 

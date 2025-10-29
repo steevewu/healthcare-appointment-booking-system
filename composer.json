@@ -6,6 +6,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.1",
+        "awcodes/filament-badgeable-column": "^2.3",
         "doctrine/dbal": "*",
         "filament/filament": "^3.3",
         "guava/filament-clusters": "*",
