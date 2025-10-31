@@ -2,6 +2,7 @@
 
 namespace App\Filament\Officer\Widgets;
 
+use Carbon\Carbon;
 use DB;
 use Leandrocfe\FilamentApexCharts\Widgets\ApexChartWidget;
 use Filament\Forms;
@@ -21,27 +22,42 @@ class PatientChart extends ApexChartWidget
 
 
 
+
+
     protected function getFormSchema(): array
     {
+        $minYear = DB::table('users')->min(DB::raw('YEAR(created_at)')) ?? 2020;
         return [
-            Forms\Components\DatePicker::make('start')
-                ->label(__('filament::charts.filters.start_date'))
-                ->default(now()->startOfYear())
-                ->native(false)
-                ->displayFormat('Y'),
-            Forms\Components\DatePicker::make('end')
-                ->label(__('filament::charts.filters.end_date'))
-                ->default(now()->endOfYear())
-                ->native(false)
-                ->displayFormat('Y')
+            Forms\Components\TextInput::make('start')
+                ->numeric()
+                ->minValue($minYear)
+                ->maxValue(now()->year)
+                ->default(now()->subYearsNoOverflow(2)->year),
+            Forms\Components\TextInput::make('end')
+                ->numeric()
+                ->minValue($minYear)
+                ->maxValue(now()->year)
+                ->default(now()->year)
+                ->gte('start')
 
         ];
     }
     protected function getOptions(): array
     {
 
-        $dateStart = $this->filterFormData['start'];
-        $dateEnd = $this->filterFormData['end'];
+
+        if (!$this->readyToLoad) {
+            return [];
+        }
+
+
+
+
+        $startDate = Carbon::create($this->filterFormData['start'])->startOfYear();
+        $endDate = Carbon::create($this->filterFormData['end'])->endOfYear();
+
+
+
 
         $rawEnrollmentData = DB::table('patients')
             ->join('users', 'patients.user_id', '=', 'users.id')
@@ -50,6 +66,7 @@ class PatientChart extends ApexChartWidget
                 DB::raw('MONTH(users.created_at) as month'),
                 DB::raw('count(patients.id) as count')
             )
+            ->whereBetween('created_at', [$startDate, $endDate])
             ->groupBy('year', 'month')
             ->orderBy('year', 'desc')
             ->orderBy('month')
@@ -89,7 +106,6 @@ class PatientChart extends ApexChartWidget
                 'labels' => [
                     'style' => [
                         'fontFamily' => 'inherit',
-                        // 'formatter' => fn (int $val) => number_format($val, 0),
                     ],
                 ],
                 'title' => [

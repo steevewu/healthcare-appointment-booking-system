@@ -2,10 +2,11 @@
 
 namespace App\Filament\Officer\Pages;
 
+use App\Filament\Officer\Widgets\PatientAgeChart;
 use App\Filament\Officer\Widgets\PatientChart;
 use Filament\Pages\Page;
 
-class StatisticsPage extends Page
+class PatientStatsPage extends Page
 {
     protected static ?string $navigationIcon = 'heroicon-o-document-text';
 
@@ -15,6 +16,7 @@ class StatisticsPage extends Page
     public function getHeaderWidgets(): array{
         return [
             PatientChart::make(),
+            PatientAgeChart::make()
         ];
     }
 }

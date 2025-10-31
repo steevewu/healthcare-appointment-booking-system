@@ -75,14 +75,7 @@ Route::get('/test', function () {
 
 
 
-    $workshift = Workshift::firstOrNew(
-        [
-            'event_id' => 7,
-            'doctor_id' => 1
-        ],
-        []
-    );
-    dd($workshift->exists);
+    dd(Carbon::create(2024));
 
 
 
