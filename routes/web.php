@@ -74,9 +74,21 @@ Route::get('/test', function () {
 
 
 
+    $weekDays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
-    dd(Carbon::create(2024));
+    $monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
+    $heatmap = [];
+    foreach ($weekDays as $i => $label) {
+        $heatmap[$i] = [
+            'name' => $label,
+            'data' => array_map(function ($month) {
+                return ['x' => $month, 'y' => 0];
+            }, $monthNames),
+        ];
+    }
+
+    dd($heatmap);
 
 
 
