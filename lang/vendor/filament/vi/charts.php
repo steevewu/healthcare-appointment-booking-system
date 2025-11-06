@@ -1,49 +1,49 @@
 <?php
 
 return [
-    'total_patient_label' => 'Bệnh Nhân Trong Hệ Thống',
-    'total_patient_description' => 'Tổng số lượng bệnh nhân hiện tại trong hệ thống.',
-    'change_patient_label' => 'Bệnh Nhân Mới Trong Tháng',
-    'change_patient_description' => 'so với số lượng bệnh nhân tháng trước.',
-    'total_appointment_label' => 'Số Ca Khám Bệnh',
-    'total_appointment_description' => 'Tổng số ca khám bệnh đã thực hiện tại phòng khám',
-    'change_appointment_label' => 'Ca Khám Bệnh Mới Trong Tháng',
-    'change_appointment_description' => 'so với số lượng ca khám bệnh tháng trước',
-    'increase' => 'đã tăng',
-    'decrease' => 'đã giảm',
+    'total_patient_label'       => 'Bệnh Nhân Trong Hệ Thống',
+    'total_patient_description' => 'Tổng Số Lượng Bệnh Nhân Hiện Tại Trong Hệ Thống.',
+    'change_patient_label'      => 'Bệnh Nhân Mới Trong Tháng',
+    'change_patient_description' => 'So Với Số Lượng Bệnh Nhân Tháng Trước.',
+    'total_appointment_label'   => 'Số Ca Khám Bệnh',
+    'total_appointment_description' => 'Tổng Số Ca Khám Bệnh Đã Thực Hiện Tại Phòng Khám',
+    'change_appointment_label'  => 'Ca Khám Bệnh Mới Trong Tháng',
+    'change_appointment_description' => 'So Với Số Lượng Ca Khám Bệnh Tháng Trước',
+    'increase'                  => 'Đã Tăng',
+    'decrease'                  => 'Đã Giảm',
 
     'appointments' => [
-        'title' => 'Thống kê ca khámh bệnh',
+        'title' => 'Thống Kê Ca Khám Bệnh',
         'label' => 'Buổi Khám Bệnh',
-        'group' => 'Nhóm chức năng báo cáo/ thống kê',
+        'group' => 'Nhóm Chức Năng Báo Cáo/ Thống Kê',
 
         'distribution' => [
-            'title' => 'Biểu đồ thể hiện sự phân bố của các ca khám bệnh theo khoa'
+            'title' => 'Biểu Đồ Thể Hiện Sự Phân Bố Của Các Ca Khám Bệnh Theo Khoa'
         ],
 
 
         'heatmap' => [
-            'title' => 'Biểu đồ thể hiện tần suất của các ca khám bệnh theo từng mốc thời gian'
+            'title' => 'Biểu Đồ Thể Hiện Tần Suất Của Các Ca Khám Bệnh Theo Từng Mốc Thời Gian'
         ],
     ],
-    
-    
+
+
     'patients' => [
-        'title' => 'Thống kê bệnh nhân',
+        'title' => 'Thống Kê Bệnh Nhân',
         'label' => 'Bệnh Nhân',
-        'group' => 'Nhóm chức năng báo cáo/ thống kê',
+        'group' => 'Nhóm Chức Năng Báo Cáo/ Thống Kê',
 
 
         'enrollments' => [
-            'title' => 'Biểu đồ thể hiện số lượng bệnh nhân mới tham gia vào hệ thống qua từng thời kỳ',
+            'title' => 'Biểu Đồ Thể Hiện Số Lượng Bệnh Nhân Mới Tham Gia Vào Hệ Thống Qua Từng Thời Kỳ',
             'x-axis' => 'Tháng',
-            'y-axis' => 'Số bệnh nhân'
+            'y-axis' => 'Số Bệnh Nhân'
         ],
 
-        
+
         'ages' => [
-            'title' => 'Biểu đồ thể hiện sự phân bố độ tuổi của bệnh nhân trong hệ thống',
+            'title' => 'Biểu Đồ Thể Hiện Sự Phân Bố Độ Tuổi Của Bệnh Nhân Trong Hệ Thống',
         ],
     ],
-    
+
 ];
