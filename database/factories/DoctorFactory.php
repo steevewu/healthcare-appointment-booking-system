@@ -12,6 +12,8 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class DoctorFactory extends Factory
 {
+
+    protected $model = Doctor::class;
     /**
      * Define the model's default state.
      *
@@ -19,33 +21,37 @@ class DoctorFactory extends Factory
      */
     public function definition(): array
     {
+
+        $this->faker->addProvider(new \DavidBadura\FakerMarkdownGenerator\FakerProvider($this->faker));
         return [
-            //
             'user_id' => User::factory(),
-            'fullname' => $this->faker->name,
+            'fullname' => $this->faker->name(),
+            'dob' => $this->faker->dateTimeBetween('-75 years', '-30 years'),
+            'depart_id' => Department::inRandomOrder()->value('id'),
+            'resume' => $this->faker->markdownNumberedList()
         ];
     }
 
+
     public function configure()
     {
-        return $this->afterCreating(function (Doctor $doctor) {
-            $faker = \Faker\Factory::create();
-            // Assign role to the associated user
-            $user = $doctor->user;
-
-            $doctor->forceFill(
-                [
-                    'depart_id' => Department::inRandomOrder()->value('id')
-                ]
-            );
-            $user->forceFill([
-                'created_at' => $faker->dateTimeBetween('-5 year', 'now'),
-                'updated_at' => now(),
-            ]);
-
-            $user->assignRole('doctor');
-            $user->save();
-            $doctor->save();
-        });
+        return $this->afterCreating(
+            function (Doctor $doctor) {
+                $user = $doctor->user;
+                $user->assignRole('doctor');
+                $user->save();
+            }
+        );
     }
+
+
+    public function withEmail(string $email){
+        return $this->state(
+            fn() => [
+                'user_id' => User::factory()->withEmail($email)
+            ]
+        );
+    }
+
+
 }

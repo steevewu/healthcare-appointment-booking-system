@@ -2,17 +2,18 @@
 
 namespace Database\Factories;
 
-use App\Models\Patient;
+use App\Models\Scheduler;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Patient>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Scheduler>
  */
-class PatientFactory extends Factory
+class SchedulerFactory extends Factory
 {
 
-    protected $model = Patient::class;
+
+    protected $model = Scheduler::class;
     /**
      * Define the model's default state.
      *
@@ -23,21 +24,19 @@ class PatientFactory extends Factory
         return [
             'user_id' => User::factory(),
             'fullname' => $this->faker->name(),
-            'dob' => $this->faker->dateTimeBetween('-80 years', '-10 years')
+            'dob' => $this->faker->dateTimeBetween('-65 years, -20 years'),
         ];
     }
 
 
-    public function configure(){
+    public function configure()
+    {
         return $this->afterCreating(
-            function (Patient $patient){
-                $user = $patient->user;
-                $user->forceFill(
-                    [
-                        'created_at' => $this->faker->dateTimeBetween('-5 years', 'now')
-                    ]
-                );
-                $user->assignRole('patient');
+            function (Scheduler $scheduler) {
+
+                $user = $scheduler->user;
+
+                $user->assignRole('scheduler');
                 $user->save();
             }
         );

@@ -12,6 +12,8 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class AppointmentFactory extends Factory
 {
+
+    protected $model = Appointment::class;
     /**
      * Define the model's default state.
      *
@@ -19,24 +21,22 @@ class AppointmentFactory extends Factory
      */
     public function definition(): array
     {
+        $this->faker->addProvider(new \DavidBadura\FakerMarkdownGenerator\FakerProvider($this->faker));
         return [
-            //
-
             'workshift_id' => Workshift::factory(),
-            'patient_id' => Patient::inRandomOrder()->value('id')
+            'patient_id' => Patient::inRandomOrder()->value('id'),
+            'status' => $this->faker->randomElement(['pending', 'canceled', 'confirmed']),
+            'message' => $this->faker->markdownNumberedList(),
         ];
     }
 
 
-    public function configure(){
-        return $this->afterCreating(function (Appointment $workshift) {
-            $workshift->forceFill(
-                [
-                    'status' => $this->faker->randomElement(['pending', 'confirmed']),
-                ]
-            );
-
-            $workshift->save();
-        });
+    public function confirmed()
+    {
+        return $this->state(
+            fn() => [
+                'status' => 'confirmed'
+            ]
+        );
     }
 }

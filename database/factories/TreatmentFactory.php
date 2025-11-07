@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Appointment;
+use App\Models\Treatment;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -10,19 +11,20 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class TreatmentFactory extends Factory
 {
+    protected $model = Treatment::class;
+
     /**
      * Define the model's default state.
      *
      * @return array<string, mixed>
      */
-    public function definition()
+    public function definition(): array
     {
-        // The appointment_id MUST belong to an appointment with 'confirmed' status.
-        // We use a closure here to ensure a confirmed appointment is created if needed.
-        $appointment = Appointment::factory()->state(['status' => 'confirmed'])->create();
-
+        $this->faker->addProvider(new \DavidBadura\FakerMarkdownGenerator\FakerProvider($this->faker));
         return [
-            'appointment_id' => $appointment->id,
+            'appointment_id' => Appointment::factory()->confirmed()->create(),
+            'notes' => $this->faker->markdownNumberedList(),
+            'medication' => $this->faker->markdownNumberedList()
         ];
     }
 }

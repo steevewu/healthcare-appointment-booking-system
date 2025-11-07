@@ -2,17 +2,18 @@
 
 namespace Database\Factories;
 
-use App\Models\Patient;
+use App\Models\Officer;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Patient>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Officer>
  */
-class PatientFactory extends Factory
+class OfficerFactory extends Factory
 {
 
-    protected $model = Patient::class;
+
+    protected $model = Officer::class;
     /**
      * Define the model's default state.
      *
@@ -20,24 +21,23 @@ class PatientFactory extends Factory
      */
     public function definition(): array
     {
+
+
         return [
+            //
             'user_id' => User::factory(),
             'fullname' => $this->faker->name(),
-            'dob' => $this->faker->dateTimeBetween('-80 years', '-10 years')
+            'dob' => $this->faker->dateTimeBetween('-65 years', '-25 years'),
         ];
     }
 
 
     public function configure(){
         return $this->afterCreating(
-            function (Patient $patient){
-                $user = $patient->user;
-                $user->forceFill(
-                    [
-                        'created_at' => $this->faker->dateTimeBetween('-5 years', 'now')
-                    ]
-                );
-                $user->assignRole('patient');
+            function (Officer $officer){
+
+                $user = $officer->user;
+                $user->assignRole('officer');
                 $user->save();
             }
         );

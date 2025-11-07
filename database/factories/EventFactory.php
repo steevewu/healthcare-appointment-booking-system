@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Event;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -9,26 +10,27 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class EventFactory extends Factory
 {
+
+
+    protected $model = Event::class;
+
+
     /**
      * Define the model's default state.
      *
      * @return array<string, mixed>
      */
+
     public function definition(): array
     {
-
-        $startDate = $this->faker->dateTimeBetween('-3 year', '+1 month');
-
+        $startDate = $this->faker->dateTimeBetween('-5 years', '+1 months');
         $durationHours = $this->faker->numberBetween(1, 4);
-
         $endDate = (clone $startDate)->modify("+{$durationHours} hours");
-        
 
         return [
-            'title' => $this->faker->sentence(3),
+            'title' => $this->faker->sentence(6),
             'start_at' => $startDate,
             'end_at' => $endDate,
         ];
-        
     }
 }

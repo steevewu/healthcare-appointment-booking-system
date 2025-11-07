@@ -2,14 +2,16 @@
 
 namespace Database\Factories;
 
+use App\Models\Department;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Str;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Department>
  */
 class DepartmentFactory extends Factory
 {
+
+    protected $model = Department::class;
     /**
      * Define the model's default state.
      *
@@ -17,15 +19,15 @@ class DepartmentFactory extends Factory
      */
     public function definition(): array
     {
+
         $name = $this->faker->unique()->jobTitle() . ' Department';
         $alias = strtoupper($this->faker->unique()->bothify('???##'));
-
-
+        $this->faker->addProvider(new \DavidBadura\FakerMarkdownGenerator\FakerProvider($this->faker));
         return [
             //
-            'name' => Str::limit($name, 50, ''),
+            'name' => $name,
             'alias' => $alias,
-
+            'description' => $this->faker->markdown()
         ];
     }
 }

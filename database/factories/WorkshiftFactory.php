@@ -12,6 +12,8 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class WorkshiftFactory extends Factory
 {
+
+    protected $model = Workshift::class;
     /**
      * Define the model's default state.
      *
@@ -24,5 +26,4 @@ class WorkshiftFactory extends Factory
             'doctor_id' => Doctor::inRandomOrder()->value('id')
         ];
     }
-
 }

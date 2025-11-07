@@ -2,8 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Models\Doctor;
+use App\Models\Officer;
+use App\Models\Patient;
+use App\Models\Scheduler;
 use App\Models\User;
-use Date;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -18,26 +21,14 @@ class UserSeeder extends Seeder
 
         User::create(
             [
-                'email' => 'admin@pka.com',
-                'password' => 'admin',
+                'email' => 'admin1@pka.com',
+                'password' => 'phenikaa'
             ]
-        )->forceFill(
-            [
-                'email_verified_at' => Date::now()
-            ]
-        )->assignRole('admin')->save();
+        );
 
-
-
-        User::create(
-            [
-                'email' => 'doctor1@pka.com',
-                'password' => 'doctor',
-            ]
-        )->forceFill(
-            [
-                'email_verified_at' => Date::now()
-            ]
-        )->assignRole('doctor')->save();
+        Officer::factory()->withEmail('officer1@pka.com')->create();
+        Scheduler::factory()->withEmail('scheduler1@pka.com')->create();
+        Doctor::factory()->withEmail('doctor1@pka.com')->create();
+        Patient::factory()->withEmail('patient1@pka.com')->create();
     }
 }
