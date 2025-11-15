@@ -4,6 +4,7 @@ namespace App\Providers\Filament;
 
 use App\Filament\Shared\Pages\MyProfilePage;
 use App\Livewire\UserAddress;
+use App\Livewire\UserDateOfBirth;
 use App\Livewire\UserProfile;
 use Blade;
 use Filament\Http\Middleware\Authenticate;
@@ -77,6 +78,7 @@ class SchedulerPanelProvider extends PanelProvider
                     ->myProfileComponents(
                         [
                             UserProfile::class,
+                            UserDateOfBirth::class,
                             UserAddress::class,
                         ]
                     )

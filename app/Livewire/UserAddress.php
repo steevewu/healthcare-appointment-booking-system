@@ -84,6 +84,7 @@ class UserAddress extends PersonalInfo
             ->placeholder(__('filament::resources.province'))
             ->searchable()
             ->live()
+            ->required()
             ->afterStateUpdated(
                 function ($state, callable $set) {
                     $set('district_id', null);
@@ -96,6 +97,7 @@ class UserAddress extends PersonalInfo
     {
         return Forms\Components\Select::make('district_id')
             ->label(__('filament::resources.district'))
+            ->required()
             ->options(
                 function (callable $get) {
 
@@ -136,6 +138,7 @@ class UserAddress extends PersonalInfo
     {
         return Forms\Components\Select::make('ward_id')
             ->label(__('filament::resources.ward'))
+            ->required()
             ->options(
                 function (callable $get) {
                     $district = $get('district_id');
