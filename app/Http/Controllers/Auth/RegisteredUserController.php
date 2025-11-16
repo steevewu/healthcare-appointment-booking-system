@@ -34,6 +34,7 @@ class RegisteredUserController extends Controller
         $request->validate([
             'name' => ['required', 'min:8', 'max:50'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
+            'dob' => ['required'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
@@ -44,7 +45,8 @@ class RegisteredUserController extends Controller
 
         $patient = new Patient(
             [
-                'fullname' => $request->name
+                'fullname' => $request->name,
+                'dob' => $request->dob,
             ]
         );
         $patient->forceFill(

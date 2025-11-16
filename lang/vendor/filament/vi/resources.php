@@ -25,6 +25,7 @@ return [
     'name' => 'Tên Của :model',
     'change_pass' => 'Thay Đổi Mật Khẩu',
     'logout' => 'Đăng Xuất',
+    'alias' => 'Tên Viết Tắt',
 
     'patients' => [
         'label' => 'Bệnh Nhân',

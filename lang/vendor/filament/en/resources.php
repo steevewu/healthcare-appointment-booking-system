@@ -25,6 +25,7 @@ return [
     'name' => ':model Name',
     'change_pass' => 'Change Password',
     'logout' => 'Logout',
+    'alias' => 'Abbreviation',
 
     'patients' => [
         'label' => 'Patient',
