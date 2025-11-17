@@ -112,7 +112,7 @@
                 <div class="pt-6 text-center">
                     <p class="text-sm font-normal text-[#617589] dark:text-gray-400">
                         Đã có tài khoản?
-                        <a class="font-semibold text-primary hover:underline" href="{{route('register')}}">Đăng nhập ngay</a>
+                        <a class="font-semibold text-primary hover:underline" href="{{route(name: 'login')}}">Đăng nhập ngay</a>
                     </p>
                 </div>
             </div>
