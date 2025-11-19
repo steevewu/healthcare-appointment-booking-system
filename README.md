@@ -97,7 +97,7 @@ This will start the application at [http://localhost:8000](http://localhost:8000
 Use these following credentials to login into system:
 
 
-```json
+```jsonc
 {
     // json format:
     // "role": {
