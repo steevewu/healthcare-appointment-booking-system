@@ -94,6 +94,43 @@ php artsian serve
 
 This will start the application at [http://localhost:8000](http://localhost:8000).
 
+Use these following credentials to login into system:
+
+
+```json
+{
+    // json format:
+    // "role": {
+    //     "email": "mail@example.com",
+    //     "password": "somepassword"
+    // }
+
+    "admin": {
+        "email": "admin1@pka.com",
+        "password": "phenikaa"
+    },
+
+    "officer": {
+        "email": "officer1@pka.com",
+        "password": "phenikaa"
+    },
+
+    "scheduler": {
+        "email": "scheduler1@pka.com",
+        "password": "phenikaa"
+    },
+
+    "doctor": {
+        "email": "doctor1@pka.com",
+        "password": "phenikaa"
+    },
+
+    "patient1": {
+        "email": "patient1@pka.com",
+        "password": "phenikaa"
+    },
+}
+```
 
 ## Acknowledgements
 - Thanks to the [Laravel](https://laravel.com/) community for providing this awesome framework.
