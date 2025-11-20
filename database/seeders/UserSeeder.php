@@ -24,7 +24,8 @@ class UserSeeder extends Seeder
                 'email' => 'admin1@pka.com',
                 'password' => 'phenikaa'
             ]
-        );
+        )
+        ->assignRole('admin');
 
         Officer::factory()->withEmail('officer1@pka.com')->create();
         Scheduler::factory()->withEmail('scheduler1@pka.com')->create();
