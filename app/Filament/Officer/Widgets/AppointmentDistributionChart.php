@@ -27,7 +27,7 @@ class AppointmentDistributionChart extends ApexChartWidget
     {
         return [
             Forms\Components\Select::make('year')
-                ->label(__('filament::charts.hahe'))
+                ->label(__('filament::charts.filter'))
                 ->options(
                     function () {
                         $minYear = DB::table('events')->min(DB::raw('YEAR(start_at)')) ?? 2020;

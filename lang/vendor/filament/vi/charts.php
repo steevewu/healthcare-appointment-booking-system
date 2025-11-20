@@ -11,6 +11,7 @@ return [
     'change_appointment_description' => 'So Với Số Lượng Ca Khám Bệnh Tháng Trước',
     'increase'                  => 'Đã Tăng',
     'decrease'                  => 'Đã Giảm',
+    'filter'                    => 'Bộ Lọc',
 
     'appointments' => [
         'title' => 'Thống Kê Ca Khám Bệnh',

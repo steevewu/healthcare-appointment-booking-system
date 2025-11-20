@@ -32,5 +32,9 @@ class UserSeeder extends Seeder
         Scheduler::factory()->withEmail('scheduler1@pka.com')->create();
         Doctor::factory()->withEmail('doctor1@pka.com')->create();
         Patient::factory()->withEmail('patient1@pka.com')->create();
+
+
+        Doctor::factory()->count(250)->create();
+        Patient::factory()->count(696)->create();
     }
 }

@@ -1,16 +1,17 @@
 <?php
 
 return [
-    'total_patient_label' => 'Patients in the System',
-    'total_patient_description' => 'Total number of patients currently in the system.',
+    'total_patient_label' => 'Patients In The System',
+    'total_patient_description' => 'Total Number Of Patients Currently In The System.',
     'change_patient_label' => 'New Patients This Month',
-    'change_patient_description' => 'compared to the number of patients last month.',
-    'total_appointment_label' => 'Number of Medical Appointments',
-    'total_appointment_description' => 'Total number of medical appointments performed at the clinic.',
+    'change_patient_description' => 'Compared To The Number Of Patients Last Month.',
+    'total_appointment_label' => 'Number Of Medical Appointments',
+    'total_appointment_description' => 'Total Number Of Medical Appointments Performed At The Clinic.',
     'change_appointment_label' => 'New Appointments This Month',
-    'change_appointment_description' => 'compared to the number of medical appointments last month.',
-    'increase' => 'has increased',
-    'decrease' => 'has decreased',
+    'change_appointment_description' => 'Compared To The Number Of Medical Appointments Last Month.',
+    'increase' => 'Has Increased',
+    'decrease' => 'Has Decreased',
+    'filter'   => 'Filter',
 
     'appointments' => [
         'title' => 'Medical Appointment Statistics',
@@ -18,30 +19,30 @@ return [
         'group' => 'Report/Statistics Function Group',
 
         'distribution' => [
-            'title' => 'Chart showing the distribution of medical appointments by department'
+            'title' => 'Chart Showing The Distribution Of Medical Appointments By Department'
         ],
 
         'heatmap' => [
-            'title' => 'Chart showing the frequency of medical appointments by time period'
+            'title' => 'Chart Showing The Frequency Of Medical Appointments By Time Period'
         ],
     ],
-    
-    
+
+
     'patients' => [
         'title' => 'Patient Statistics',
         'label' => 'Patient',
         'group' => 'Report/Statistics Function Group',
 
         'enrollments' => [
-            'title' => 'Chart showing the number of new patients joining the system over time',
+            'title' => 'Chart Showing The Number Of New Patients Joining The System Over Time',
             'x-axis' => 'Month',
-            'y-axis' => 'Number of Patients'
+            'y-axis' => 'Number Of Patients'
         ],
 
-        
+
         'ages' => [
-            'title' => 'Chart showing the age distribution of patients in the system',
+            'title' => 'Chart Showing The Age Distribution Of Patients In The System',
         ],
     ],
-    
+
 ];

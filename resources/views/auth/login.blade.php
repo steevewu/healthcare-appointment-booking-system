@@ -72,7 +72,7 @@
                                         class="text-gray-600 dark:text-gray-400 text-base font-normal leading-normal font-display">
                                         Vui lòng nhập thông tin để đăng nhập.</p>
                                 </div>
-                                <form action='{{ route('login') }}' method='post' class="flex flex-col gap-6">
+                                <form action="{{ route('login') }}" method='post' class="flex flex-col gap-6">
                                     @csrf
                                     <div class="flex flex-col gap-4">
                                         <label class="flex flex-col min-w-40 flex-1 gap-2">
@@ -81,7 +81,7 @@
                                                 {{ __('filament::resources.email') }}</p>
                                             <input
                                                 class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-gray-900 dark:text-gray-100 focus:outline-0 focus:ring-primary/50 border border-gray-300 dark:border-gray-700 bg-background-light dark:bg-background-dark focus:border-primary h-14 placeholder:text-gray-500 dark:placeholder:text-gray-400 p-[15px] text-base font-normal leading-normal font-display"
-                                                name="email" required autofocus />
+                                                name="email" value="{{old('email')}}"required autofocus />
                                         </label>
                                         <x-input-error :messages="$errors->get('email')" class="mt-2" />
 
